@@ -9,6 +9,7 @@ import EventModal from "./components/EventModal";
 function App() {
   const [currenMonth, setCurrentMonth] = useState(getMonth());
   const { monthIndex, showEventModal } = useContext(GlobalContext);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
@@ -19,9 +20,12 @@ function App() {
       {showEventModal && <EventModal />}
 
       <div className="h-screen flex flex-col">
-        <CalendarHeader />
+        <CalendarHeader
+          showSidebar={showSidebar}
+          setShowSidebar={setShowSidebar}
+        />
         <div className="flex flex-1">
-          <Sidebar />
+          <Sidebar showSidebar={showSidebar} />
           <Month month={currenMonth} />
         </div>
       </div>
